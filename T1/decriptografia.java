@@ -47,8 +47,6 @@ public class decriptografia {
     //Slide 29-30 para a continuação da Criptoanalise
     public static int testarTamanhosChave(String texto) {
         texto = texto.toUpperCase().replaceAll("[^A-Z]", "");
-        System.out.println("Tamanho | IC medio");
-        System.out.println("--------+----------");
         double melhorIC = -1;
         int melhorTam = 1;
         for (int tam = 1; tam <= 10; tam++) {
@@ -61,7 +59,6 @@ public class decriptografia {
                 somaIC += calcularIC(coluna.toString());
             }
             double icMedio = somaIC / tam;
-            System.out.printf("%7d | %.6f%n", tam, icMedio);
             if (icMedio > melhorIC) {
                 melhorIC = icMedio;
                 melhorTam = tam;
