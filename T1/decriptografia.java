@@ -176,7 +176,6 @@ public class decriptografia {
         try {
             System.out.println("--- Iniciando decriptografia ---");
             String texto = lerArquivo(path);
-            System.out.println("IC do texto completo: " + calcularIC(texto));
             int tamanho = testarTamanhosChave(texto);
             String chave = descobrirChave(texto, tamanho);
             System.out.println("Chave descoberta: " + chave);
