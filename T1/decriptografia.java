@@ -45,6 +45,8 @@ public class decriptografia {
     // depois faz a média dos ICs das colunas e compara os valores para identificar o tamanho mais provável da chave
     // esse passo é importante porque, em Vigenere, as letras da mesma posição repetem o padrão da chave e geram uma média maior de coincidência
     //Slide 29-30 para a continuação da Criptoanalise
+    // Resumindo, "Vou agrupar por colunas de mesmo tamanho a espaçando, sera que meu IC é alto? ou devo aumentar o espaçamento, o tamanho..." a que melhorar o IC
+    //será o palpite
     public static int testarTamanhosChave(String texto) {
         texto = texto.toUpperCase().replaceAll("[^A-Z]", "");
         double melhorIC = -1;
@@ -74,6 +76,8 @@ public class decriptografia {
     // usa a análise de frequência do português para comparar a coluna com o padrão esperado da língua
     // quando o valor chi-quadrado for menor, significa que a coluna está mais próxima da distribuição natural do idioma
     // Slide 31
+    // de forma pratica " Faço uma mega distribuição de saltos, chamando de shift, e guardo a frequencia que uma letra aparece, após testar esse shift
+    // vou para o quanto essa letra deveria aparecer normalmente, a que tiver a menor diferenca, após desfazer, do normal no português provavelmente é o shiift, pois os outros são mais dispersos, retorno esse salto"
     public static int descobrirLetraChave(String coluna) {
         coluna = coluna.toUpperCase().replaceAll("[^A-Z]", "");
         int n = coluna.length();
@@ -129,6 +133,8 @@ public class decriptografia {
     // Função que descobre a chave completa do ciframento Vigenere a partir do texto cifrado
     // primeiro separa o texto em colunas com base no tamanho da chave, depois analisa cada coluna para encontrar o deslocamento correspondente
     // ao final, concatena todas as letras descobertas e forma a chave completa
+    // Aqui em resumo é: "Crio um espaço de tamanho fixo, que é o tamanho da chave, nele agrego todas as posições i relacionados a coluna, em uma string e chamo o descobreLetra"
+    //concatena tudo e retorna a chave
     public static String descobrirChave(String textoCifrado, int tamanhoChave) {
         String texto = textoCifrado.toUpperCase().replaceAll("[^A-Z]", "");
         StringBuilder[] colunas = new StringBuilder[tamanhoChave];
@@ -149,6 +155,7 @@ public class decriptografia {
     // Função que decifra o texto cifrado usando a chave descoberta
     // para cada letra do texto, calcula a diferença entre a posição da letra cifrada e a posição da letra da chave
     // depois faz a operação inversa da cifragem para recuperar a letra original
+    // Resumindo, pega o int da letra da chave e do texto e subtrai sem precisar do board, depois pegar esse valor e descobre a letra em todo texto
     public static String decifrar(String textoCifrado, String chave) {
         String texto = textoCifrado.toUpperCase().replaceAll("[^A-Z]", "");
         chave = chave.toUpperCase().replaceAll("[^A-Z]", "");
